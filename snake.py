@@ -14,6 +14,10 @@ class Snake:
         self.direction = direction
         self.maxX = maxX
         self.maxY = maxY
+        self.growNextMove = False
+
+    def setGrowNextMove(self):
+        self.growNextMove = True
 
     def isAtTheEdge(self):
         if self.snake[0][0] == 0 and self.direction == Snake.LEFT:
@@ -60,8 +64,16 @@ class Snake:
     def __moveSnakeUp(self):
         newSnake = []
         newSnake.append([self.snake[0][0], self.snake[0][1] - 1])
+        
+        # decide weather to grow or move
+        cellsToRemove = 1
+        if self.growNextMove:
+            cellsToRemove = 0
+            self.growNextMove = False
+
+        # move rest of snake
         i = 0
-        while i < len(self.snake) - 1:
+        while i < len(self.snake) - cellsToRemove:
             newSnake.append(self.snake[i])
             i = i + 1
         
@@ -71,9 +83,18 @@ class Snake:
 
     def __moveSnakeRight(self):
         newSnake = []
+        # advance the head
         newSnake.append([self.snake[0][0] + 1, self.snake[0][1]])
+
+        # decide weather to grow or move
+        cellsToRemove = 1
+        if self.growNextMove:
+            cellsToRemove = 0
+            self.growNextMove = False
+
+        # move rest of snake
         i = 0
-        while i < len(self.snake) - 1:
+        while i < len(self.snake) - cellsToRemove:
             newSnake.append(self.snake[i])
             i = i + 1
         
@@ -84,8 +105,16 @@ class Snake:
     def __moveSnakeLeft(self):
         newSnake = []
         newSnake.append([self.snake[0][0] - 1, self.snake[0][1]])
+        
+        # decide weather to grow or move
+        cellsToRemove = 1
+        if self.growNextMove:
+            cellsToRemove = 0
+            self.growNextMove = False
+
+        # move rest of snake
         i = 0
-        while i < len(self.snake) - 1:
+        while i < len(self.snake) - cellsToRemove:
             newSnake.append(self.snake[i])
             i = i + 1
         
@@ -96,8 +125,16 @@ class Snake:
     def __moveSnakeDown(self):
         newSnake = []
         newSnake.append([self.snake[0][0], self.snake[0][1] + 1])
+        
+        # decide weather to grow or move
+        cellsToRemove = 1
+        if self.growNextMove:
+            cellsToRemove = 0
+            self.growNextMove = False
+
+        # move rest of snake
         i = 0
-        while i < len(self.snake) - 1:
+        while i < len(self.snake) - cellsToRemove:
             newSnake.append(self.snake[i])
             i = i + 1
         

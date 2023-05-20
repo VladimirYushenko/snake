@@ -1,4 +1,4 @@
-import snake
+import snake, gameText
 import sys, pygame
 
 pygame.init()
@@ -16,14 +16,9 @@ empty = pygame.image.load("assets/empty.png")
 body = pygame.image.load("assets/body.png")
 bodyrect = body.get_rect()
 
-letterA = pygame.image.load("assets/letters/A.png")
-DEFAULT_IMAGE_SIZE = (51, 51)
- 
-# Scale the image to your needed size
-letterA = pygame.transform.scale(letterA, DEFAULT_IMAGE_SIZE)
-letterArect = letterA.get_rect()
-
 mainSnake = snake.Snake([[3, 4], [3, 3], [3, 2]], snake.Snake.DOWN, 28, 21)
+
+text = gameText.GameText()
 
 loopCounter = 0
 
@@ -41,6 +36,8 @@ while True:
         mainSnake.changeDirection(snake.Snake.LEFT)
     elif pygame.key.get_pressed()[pygame.K_d]:
         mainSnake.changeDirection(snake.Snake.RIGHT)
+    elif pygame.key.get_pressed()[pygame.K_SPACE]:
+        mainSnake.setGrowNextMove()
     
 
 
@@ -69,5 +66,5 @@ while True:
         screen.blit(body, bodyrect)
 
     screen.blit(ball, ballrect)
-    screen.blit(letterA, letterArect)
+    text.drawText(screen, 'Hello World', 44, 44)
     pygame.display.flip()
