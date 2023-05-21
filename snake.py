@@ -1,3 +1,4 @@
+import pygame
 class Snake:
     UP = 1
     RIGHT = 2
@@ -15,6 +16,7 @@ class Snake:
         self.maxX = maxX
         self.maxY = maxY
         self.growNextMove = False
+        self.bodyImage = pygame.image.load("assets/body.png")
 
     def setGrowNextMove(self):
         self.growNextMove = True
@@ -55,6 +57,10 @@ class Snake:
             self.direction = newDirection
         
         return self.direction
+    
+    def render(self, screen: pygame.Surface):
+        for part in self.snake:
+            screen.blit(self.bodyImage, (44 * part[0], 44 * part[1]))
 
     def printSnake(self):
         print('snake')
