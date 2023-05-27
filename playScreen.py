@@ -1,4 +1,4 @@
-import pygame, board, snake, constants
+import pygame, board, snake, constants, foodItems
 import gameText
 class PlayScreen:
     def __init__(self, gameBoard: board.Board, mainSnake: snake.Snake):
@@ -7,11 +7,18 @@ class PlayScreen:
         self.gameBoard = gameBoard
         self.mainSnake = mainSnake
         self.loopCounter = 0
+        #self.foodItem1 = foodItem.FoodItem(2, 1, gameBoard.SQUARE_WIDTH, gameBoard.SQUARE_HEIGHT)
+        #self.foodItem2 = foodItem.FoodItem(3, 6, gameBoard.SQUARE_WIDTH, gameBoard.SQUARE_HEIGHT)
+        self.foodItems = foodItems.FoodItems(gameBoard.SQUARE_WIDTH, gameBoard.SQUARE_HEIGHT)
+        self.foodItems.addFoodItem(2, 1)
+        self.foodItems.addFoodItem(3, 6)
 
     def render(self, screen: pygame.Surface):
         screen.fill(self.black)
 
         self.gameBoard.render(screen)
+
+        self.foodItems.render(screen)
 
         self.mainSnake.render(screen)
 

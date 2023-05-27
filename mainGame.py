@@ -21,7 +21,7 @@ mainSnake = snake.Snake(
 
 play = playScreen.PlayScreen(gameBoard, mainSnake)
 splash = splashScreen.SplashScreen(gameBoard)
-pause = pauseScreen.PauseScreen()
+pause = pauseScreen.PauseScreen(gameBoard, mainSnake)
 
 loopCounter = 0
 
