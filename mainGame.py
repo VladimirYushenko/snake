@@ -1,4 +1,4 @@
-import snake, gameText, board, playScreen, splashScreen, constants
+import snake, gameText, board, playScreen, splashScreen, pauseScreen, constants
 import sys, pygame
 
 pygame.init()
@@ -6,7 +6,6 @@ pygame.init()
 gameState = constants.GAME_STATE_SPLASH
 
 gameBoard = board.Board(20, 20)
-
 size = gameBoard.screenWidth, gameBoard.screenHeight
 speed = [2, 2]
 
@@ -21,7 +20,8 @@ mainSnake = snake.Snake(
     board.Board.SQUARE_HEIGHT)
 
 play = playScreen.PlayScreen(gameBoard, mainSnake)
-splash = splashScreen.SplashScreen()
+splash = splashScreen.SplashScreen(gameBoard)
+pause = pauseScreen.PauseScreen()
 
 loopCounter = 0
 
@@ -34,6 +34,8 @@ while True:
         currentScreen = splash
     elif gameState == constants.GAME_STATE_PLAY:
         currentScreen = play
+    elif gameState == constants.GAME_STATE_PAUSE:
+        currentScreen = pause
     
     gameState = currentScreen.process()
     currentScreen.render(screen)

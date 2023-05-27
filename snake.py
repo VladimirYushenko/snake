@@ -151,4 +151,16 @@ class Snake:
 
         return self.snake
     
+    def hasDied(self):
+        index = 1
+        while index < len(self.snake):
+            if self.snake[index] == self.snake[0]:
+                return True
+            index = index + 1
+
+        return False
+    
+    def initialize(self):
+        self.snake = [[3, 4], [3, 3], [3, 2]]
+        self.direction = Snake.DOWN
 

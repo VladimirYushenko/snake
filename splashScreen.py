@@ -1,12 +1,12 @@
-import pygame, constants
+import pygame, constants, board
 import gameText
 class SplashScreen:
-    def __init__(self):
+    def __init__(self, gameBoard: board.Board):
         self.text = gameText.GameText()
-        self.black = 0, 0, 0
+        self.gameBoard = gameBoard
 
     def render(self, screen: pygame.Surface):
-        screen.fill(self.black)
+        self.gameBoard.render(screen)
         self.text.drawText(screen, 'snake', 320, 300)
         self.text.drawText(screen, 'press any key', 100, 400)
         self.text.drawText(screen, 'to start game', 100, 480)

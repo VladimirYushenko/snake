@@ -22,6 +22,9 @@ class PlayScreen:
         if self.loopCounter == 10:
             self.loopCounter = 0
             self.mainSnake.moveSnake()
+            if self.mainSnake.hasDied():
+                self.mainSnake.initialize()
+                return constants.GAME_STATE_SPLASH
 
         if pygame.key.get_pressed()[pygame.K_w]:
             self.mainSnake.changeDirection(snake.Snake.UP)
@@ -33,5 +36,7 @@ class PlayScreen:
             self.mainSnake.changeDirection(snake.Snake.RIGHT)
         elif pygame.key.get_pressed()[pygame.K_SPACE]:
             self.mainSnake.setGrowNextMove()
-
+        elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
+            return constants.GAME_STATE_PAUSE
+    
         return constants.GAME_STATE_PLAY
