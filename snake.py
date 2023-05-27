@@ -10,13 +10,16 @@ class Snake:
     #   2 - right
     #   3 - down
     #   4 - left
-    def __init__(self, snake, direction, maxX, maxY):
+    def __init__(self, snake, direction, columns, rows, blockWidth, blockHeight):
         self.snake = snake
         self.direction = direction
-        self.maxX = maxX
-        self.maxY = maxY
+        self.maxX = columns - 1
+        self.maxY = rows - 1
         self.growNextMove = False
         self.bodyImage = pygame.image.load("assets/body.png")
+        self.bodyImage = pygame.transform.scale(self.bodyImage, (blockWidth, blockHeight))
+        self.blockWidth = blockWidth
+        self.blockHeight = blockHeight
 
     def setGrowNextMove(self):
         self.growNextMove = True
@@ -60,7 +63,7 @@ class Snake:
     
     def render(self, screen: pygame.Surface):
         for part in self.snake:
-            screen.blit(self.bodyImage, (44 * part[0], 44 * part[1]))
+            screen.blit(self.bodyImage, (self.blockWidth * part[0], self.blockHeight * part[1]))
 
     def printSnake(self):
         print('snake')
